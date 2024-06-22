@@ -10,7 +10,7 @@ import requests
 import json
 import subprocess
 import wolframalpha
-# from ecapture import ecapture as ec
+from ecapture import ecapture as ec
 
 engine = pyttsx3.init('sapi5')
 voices = engine.getProperty('voices')
@@ -65,7 +65,7 @@ def sendEmail(to, content):
     server = smtplib.SMTP('smtp.gmail.com', 587)
     server.ehlo()
     server.starttls()
-    server.login('mrnaseem745@gmail.com', 'xxxxxxxx')
+    server.login('mrnaseem745@gmail.com', 'xxxxxxxx') #change it with your email
     server.sendmail('youremail@gmail.com', to, content)
     server.close()
 
@@ -137,10 +137,16 @@ if __name__ == "__main__":
             speak(F"Sir, the time is {strTime}")
             time.sleep(1)
 
-        elif 'open code' in query:
+        elif 'open vs code' in query:
             codePath = "C:\\Users\\Administrator\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe"
             os.startfile(codePath)
             speak("Visual studio Code is open now")
+            time.sleep(1)
+
+        elif 'open spotify' in query:
+            spotify = "C:\\Users\\mrnas\\AppData\\Roaming\\Spotify\\Spotify.exe"
+            os.startfile(spotify)
+            speak("Spotify is open now")
             time.sleep(1)
 
         elif 'open portfolio' in query:
@@ -149,18 +155,12 @@ if __name__ == "__main__":
             speak("Portfolio Website is open now")
             time.sleep(1)
 
-        elif 'open epic games' in query:
-            epicPath = "C:\\Program Files (x86)\\Epic Games\\Launcher\\Portal\\Binaries\Win32\\EpicGamesLauncher.exe"
-            os.startfile(epicPath)
-            speak("Epic games is open now")
-            time.sleep(1)
-
         elif 'email to naseem' in query:
 
             try:
                 speak("What should i say?")
                 content = takeCommand()
-                to = "mrnaseem745@gmail.com"
+                to = "mrnaseem745@gmail.com" #change it with your email
                 sendEmail(to, content)
                 speak("Email has been sent!")
 
@@ -174,8 +174,8 @@ if __name__ == "__main__":
             speak("Here are some headlines from the Times Of India, Happy reading")
             time.sleep(1)
 
-      # elif 'camera' in query or "take a photo" in query:
-      #     ec.capture(0,"robo camera", "img.jpg")
+        elif 'camera' in query or "take a photo" in query:
+            ec.capture(0,"robo camera", "img.jpg")
 
         elif 'search' in query:
             query = query.replace("search", "")
@@ -185,16 +185,16 @@ if __name__ == "__main__":
         elif 'ask' in query:
             speak("I can answer to computational and geographical questions and what question do you want to ask now")
             question = takeCommand()
-            app_id = "HJWLX5-ERHEH33E54"
-            client = wolframalpha.Client('HJWLX5-ERHEH33E54')
+            app_id = "HJWLX5-ERHEH33E54" #change it with your api id 
+            client = wolframalpha.Client('HJWLX5-ERHEH33E54') #change it with your api id
             res = client.query(question)
             answer = next(res.results).text
             speak(answer)
             print(answer)
 
         elif "weather" in query:
-            api_key = "a67f902aeb09f7bb5ba42b73fd8c123c"
-            base_url = "https://api.openweathermap.org/data/2.5/weather?"
+            api_key = "a67f902aeb09f7bb5ba42b73fd8c123c" #change it with your weather api id
+            base_url = "https://api.openweathermap.org/data/2.5/weather?" 
             speak("what is the city name")
             city_name = takeCommand()
             complete_url = base_url+"appid="+api_key+"&q="+city_name
@@ -225,13 +225,13 @@ if __name__ == "__main__":
             subprocess.call(["shutdown", "/1"])
             time.sleep(3)
 
+        elif 'greet' in query:
+            name = engine.say('What is you name?')
+            engine.say('hello' + name)
+            time.sleep(1)
+            
+        elif 'shutdown' in query:
+            speak('Your personal assistant JARVIS is shutting down, Good bye')
+            print('Your personal assistant JARVIS is shutting down, Good bye')
+            exit()
 
-        # if 'shutdown' in query:
-        #     speak('Your personal assistant JARVIS is shutting down, Good bye')
-        #     print('Your personal assistant JARVIS is shutting down, Good bye')
-        #     exit()
-
-# def greet(name):
-#   name = input("Enter your name : ")
-#   speak("Hello "+name+" ,How are you!")
-#   greet(name)
