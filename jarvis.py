@@ -65,7 +65,7 @@ def sendEmail(to, content):
     server = smtplib.SMTP('smtp.gmail.com', 587)
     server.ehlo()
     server.starttls()
-    server.login('mrnaseem745@gmail.com', 'xxxxxxxx') #change it with your email
+    server.login('youremail@gmail.com', 'xxxxxxxx') #change it with your email
     server.sendmail('youremail@gmail.com', to, content)
     server.close()
 
@@ -185,15 +185,15 @@ if __name__ == "__main__":
         elif 'ask' in query:
             speak("I can answer to computational and geographical questions and what question do you want to ask now")
             question = takeCommand()
-            app_id = "HJWLX5-ERHEH33E54" #change it with your api id 
-            client = wolframalpha.Client('HJWLX5-ERHEH33E54') #change it with your api id
+            app_id = "your-api-key" #change it with your api id 
+            client = wolframalpha.Client('your-api-key') #change it with your api id
             res = client.query(question)
             answer = next(res.results).text
             speak(answer)
             print(answer)
 
         elif "weather" in query:
-            api_key = "a67f902aeb09f7bb5ba42b73fd8c123c" #change it with your weather api id
+            api_key = "your-api-key" #change it with your weather api id
             base_url = "https://api.openweathermap.org/data/2.5/weather?" 
             speak("what is the city name")
             city_name = takeCommand()
